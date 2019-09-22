@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>price</th>
+    </tr>
+    <tr th:each="flower: ${list}">
+        <td th:text="*{flower.id}"></td>
+        <td th:text="*{flower.name}"></td>
+        <td th:text="*{flower.price}"></td>
+    </tr>
+</table>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Log out">
+</form>
+</body>
+</html>
