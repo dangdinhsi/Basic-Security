@@ -3,6 +3,7 @@ package com.siddd00474.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -14,7 +15,7 @@ public class Account {
     private String email;
     @Size(min = 6, message = "Mật khẩu tối thiểu 6 kí tự")
     private String password;
-    @NotNull
+    @NotEmpty(message = "Không thể bỏ trống")
     private String name;
     private long createdAt;
     private long updatedAt;
@@ -23,7 +24,7 @@ public class Account {
     private String role;
 
     public enum Role {
-        ADMIN("admin"), USER("user");
+        ADMIN("admin"), USER("user"),EMPLOYEE("employee");
 
         private String value;
 

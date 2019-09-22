@@ -4,23 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .error{
+            color: red;
+        }
+        a{
+            text-decoration: none;
+            color: aqua;
+        }
+    </style>
 </head>
 <body>
 <form th:action="@{/accounts/create}" th:object="${account}" method="post">
     <div>
         Email: <input type="text" th:field="*{email}">
-        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
     </div>
     <div>
         Password: <input type="text" th:field="*{password}">
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
     </div>
     <div>
         Name: <input type="text" th:field="*{name}">
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
     </div>
     <div>
-        <input type="submit" value="REGISTER">
+        Role:
+        <select th:field="*{role}">
+            <option th:each="role: ${roles}" th:text="${role.name()}" th:value="${role.getValue()}"></option>
+        </select>
+    </div>
+    <div>
+        <span th:if="${result} == null"><input type="submit" value="REGISTER"></span>
+        <h4 class="error" th:if="${result} != null">Gặp lỗi nhấn button để quay lại form đăng kí</h4>
+       <button th:if="${result} != null"><a href="/accounts/create">RE-REGISTER</a></button>
     </div>
 </form>
 </body>

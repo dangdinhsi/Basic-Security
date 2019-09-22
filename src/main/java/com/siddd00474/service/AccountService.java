@@ -25,7 +25,7 @@ public class AccountService {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setCreatedAt(Calendar.getInstance().getTimeInMillis());
         account.setStatus(1);
-        account.setRole(Account.Role.USER.getValue());
+       /* account.setRole(Account.Role.USER.getValue());*/
         accountRepository.save(account);
         return account;
     }

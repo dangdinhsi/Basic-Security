@@ -1,4 +1,5 @@
 package com.siddd00474.config;
+import com.siddd00474.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -61,7 +62,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/accounts/**","/admin/flowers/list").permitAll()
+                .antMatchers("/accounts/list","/accounts/create").permitAll()
+                .antMatchers("/accounts/admin").hasAnyRole(Account.Role.ADMIN.getValue())
+                .antMatchers("/accounts/user").hasAnyRole(Account.Role.ADMIN.getValue(),Account.Role.USER.getValue())
+                .antMatchers("/accounts/employee").hasAnyRole(Account.Role.ADMIN.getValue(),Account.Role.EMPLOYEE.getValue())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

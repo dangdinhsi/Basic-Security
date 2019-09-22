@@ -4,20 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
 </head>
-<body>
-<table border="1">
-    <tr>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Name</th>
-    </tr>
-    <tr th:each="accounts:${list}">
-        <td th:text="*{accounts.email}"></td>
-        <td th:text="*{accounts.password}"></td>
-        <td th:text="*{accounts.name}"></td>
-    </tr>
-</table>
+<body >
+<div th:if="${size==0}">
+    <h4>List is empty, press button to create new <button><a href="/accounts/create">Add Account</a></button></h4>
+</div>
+<div th:if="${size !=0 }">
+    <table border="1">
+        <tr>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Role</th>
+        </tr>
+        <tr th:each="account:${list}">
+            <td th:text="*{account.email}"></td>
+            <td th:text="*{account.password}"></td>
+            <td th:text="*{account.name}"></td>
+            <td th:text="*{account.role}"></td>
+        </tr>
+    </table>
+</div>
+
 
 </body>
 </html>
